@@ -2,14 +2,14 @@
  
 Syme
 ================
-A zero-knowledge key architecture and encrypted messaging platform 
+A zero-knowledge key architecture and encrypted messaging platform | https://getsyme.com
 
 
-### Introduction and motivation
+### Motivation
 
-There is currently renewed interest in encrypted communication protocols that are adapted to live communication tools such as instant messaging. However, these protocols are not well suited for persistent communication systems, such as social networks, where users are not necessarily online at the same time. We propose a zero-knowledge key infrastructure that uses end-to-end encryption to enable persistent multiparty communication and secure key exchanges on minimally trusted servers and relays. 
+There is currently renewed interest in encrypted communication protocols that are adapted to live communication tools such as instant messaging [1,2]. However, these protocols are not well suited for persistent communication systems, such as social networks, where users are not necessarily online at the same time. We propose a zero-knowledge key infrastructure that uses end-to-end encryption to enable persistent multiparty communication and secure key exchanges on minimally trusted servers and relays. 
 
-### Objectives and assumptions
+### Objectives
 
 Our security objectives are to:
 
@@ -25,13 +25,13 @@ Providing anonymity or forward secrecy is not part of our security objectives. W
 
 #### Cryptographic Primitives
 
- - **Advanced Encryption Standard in Counter mode with CBC-MAC (AES-CCM)**: the AES-CCM cipher mode is used for symmetric encryption. The CCM mode provides message authentication and confidentiality .
- - **Elliptic Curve Cryptography (ECC)**: ECC and ECDSA with a 384-bit prime are used for encrypting and signing session keys, respectively .
- - **Password-Based Key Derivation Function (PBKDF2)**: PBKDF2 with 10,000 iterations of HMAC-SHA256 is used to derive keys from the user’s master password .
+ - **Advanced Encryption Standard in Counter mode with CBC-MAC (AES-CCM)**: the AES-CCM cipher mode is used for symmetric encryption. The CCM mode provides message authentication and confidentiality [3].
+ - **Elliptic Curve Cryptography (ECC)**: ECC and ECDSA with a 384-bit prime are used for encrypting and signing session keys, respectively [4].
+ - **Password-Based Key Derivation Function (PBKDF2)**: PBKDF2 with 10,000 iterations of HMAC-SHA256 is used to derive keys from the user’s master password [5].
 
 #### Key Exchange Protocols
 
- - **Secure Remote Password Protocol (SRP)**: user authentication is performed by means of the Secure Remote Password protocol (SRP). Version 6A of the protocol is used, with 2048-bit group parameters.
+ - **Secure Remote Password Protocol (SRP)**: user authentication is performed by means of the Secure Remote Password protocol (SRP). Version 6A of the protocol is used, with 2048-bit group parameters [6].
  - **Elliptic Curve Diffie-Hellman (ECDH)**: an Elliptic-Curve Diffie Hellman key exchange scheme is used for the transfer of the keypairs between users.
 
 #### Random Number Generation
@@ -109,7 +109,7 @@ _**Key encryption procedure**_
 
 _**Receive procedure**_
 
-![Send procedure](https://getsyme.com/img/paper/receive.png)
+<img src="https://getsyme.com/img/paper/receive.png" width="581" height="275">
 
 ### Threat Model
 
@@ -157,12 +157,12 @@ _______________
 
 (2) Kobeissi N. Cryptocat : Adopting Accessibility and Ease of Use as Security Properties. June 2013. http://arxiv.org/abs/1306.5156
 
-(3) Turan M., Barker E, Burr W. and Chen L. Special Publication 800-132 : Recommendation for Password-Based Key Derivation. December 2010. http://csrc.nist.gov/publications/nistpubs/800-132/nist-sp800-132.pdf
-
-(4) Dworking, M. Special Publication 800-38C : Recommendation for Block Cipher Modes 
+(3) Dworking, M. Special Publication 800-38C : Recommendation for Block Cipher Modes 
 of Operation: the CCM Mode for Authentication and Confidentiality. May 2004. http://csrc.nist.gov/publications/nistpubs/800-38C/SP800-38C.pdf
 
-(5) ANSI  X9.62-2005. The Ellptic Curve Digital Signature Algorithm (ECDA). https://www.x9.org/home/
+(4) ANSI  X9.62-2005. The Ellptic Curve Digital Signature Algorithm (ECDA). https://www.x9.org/home/
+
+(5) Turan M., Barker E, Burr W. and Chen L. Special Publication 800-132 : Recommendation for Password-Based Key Derivation. December 2010. http://csrc.nist.gov/publications/nistpubs/800-132/nist-sp800-132.pdf
 
 (6) Talyor D., Wu T., Mavrogiannopoulos N. and Perrin L. Using the Secure Remote Password (SRP) Protocol for TLS Authentication. RFC 5054. November 2007. http://tools.ietf.org/html/rfc5054
 
