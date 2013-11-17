@@ -7,7 +7,7 @@ A zero-knowledge key architecture and encrypted messaging platform
 
 ### Introduction and motivation
 
-There is currently renewed interest in encrypted communication protocols that are adapted to live communication tools such as instant messaging. However, these protocols are not well suited for persistent communication systems, such as social networks, where users are not necessarily online at the same time. In this paper, we describe a zero-knowledge key infrastructure that uses end-to-end encryption to enable persistent multiparty communication and secure key exchanges on minimally trusted servers and relays. 
+There is currently renewed interest in encrypted communication protocols that are adapted to live communication tools such as instant messaging. However, these protocols are not well suited for persistent communication systems, such as social networks, where users are not necessarily online at the same time. We propose a zero-knowledge key infrastructure that uses end-to-end encryption to enable persistent multiparty communication and secure key exchanges on minimally trusted servers and relays. 
 
 ### Objectives and assumptions
 
@@ -25,13 +25,13 @@ Providing anonymity or forward secrecy is not part of our security objectives. W
 
 #### Cryptographic Primitives
 
- - **Password-Based Key Derivation Function (PBKDF2)**: PBKDF2 with 10,000 iterations of HMAC-SHA256 is used to derive keys from the user’s master password .
  - **Advanced Encryption Standard in Counter mode with CBC-MAC (AES-CCM)**: the AES-CCM cipher mode is used for symmetric encryption. The CCM mode provides message authentication and confidentiality .
  - **Elliptic Curve Cryptography (ECC)**: ECC and ECDSA with a 384-bit prime are used for encrypting and signing session keys, respectively .
+ - **Password-Based Key Derivation Function (PBKDF2)**: PBKDF2 with 10,000 iterations of HMAC-SHA256 is used to derive keys from the user’s master password .
 
 #### Key Exchange Protocols
 
- - **Secure Remote Password Protocol (SRP)**: user authentication is performed by means of the Secure Remote Password protocol (SRP) . Version 6A of the protocol is used, with 2048-bit group parameters.
+ - **Secure Remote Password Protocol (SRP)**: user authentication is performed by means of the Secure Remote Password protocol (SRP). Version 6A of the protocol is used, with 2048-bit group parameters.
  - **Elliptic Curve Diffie-Hellman (ECDH)**: an Elliptic-Curve Diffie Hellman key exchange scheme is used for the transfer of the keypairs between users.
 
 #### Random Number Generation
@@ -49,7 +49,7 @@ The first step in registration is the creation of an identifier (I) for the user
 
 **4.2.2 – Key Derivation**
 
-The user’s master password, which inputted on registration, is transformed into a 512-bit master key using the PBKDF2 key-derivation function. The output from PBKDF2 is split into two 256-bit keys (K1 and K2). The first 256 bits (K1) are used as the authentication key, while the 256 last bits (K2) are used as the initialization key.
+The user’s master password, which inputted on registration, is transformed into a 512-bit master key using the PBKDF2 key-derivation function. The output from PBKDF2 is split into two 256-bit keys (K1 and K2). The first 256 bits (K1) are used as the authentication key, and the 256 last bits (K2) are used as the initialization key.
 
 **4.2.3 – Verifier Creation**
 
@@ -67,9 +67,8 @@ User authentication is performed by means of the Secure Remote Protocol, as desc
 
 #### 4.2.5 – Keyfile Creation
 
-A keyfile (KF) is initialized as an empty data structure, serialized, encrypted with K2 using AES-256-CCM, and then stored on the server. The initialization vector (IV) is changed every time the keyfile is modified.
+A keyfile (KF) is initialized as an empty data structure, serialized, encrypted with K2 using AES, and then persisted on the server. The keyfile is re-encrypted with a different initialization vector (IV) each time it is modified.
 
- 
 #### 4.3 – Keylist Creation
 
 The client requests a new keylist from the server, which replies with a unique identifier. An entry is created in the keyfile for the new keylist. A set of two 384-bit keypairs (one for encryption, and one for signatures) is generated and inserted into the keylist under the current user’s unique identifier. The new version of the keyfile is then encrypted with K2 and stored on the server.
@@ -86,14 +85,14 @@ In brief, keys are exchanged in a five-step process, which correspond to:
  
 - user B generating an ephemeral keypair; sending his ephemeral public key to user A; and sending his long-term public keys, encrypted with the ephemeral secret key, to user A;  
 
-- user A decrypting user B’s long-term public keys, broadcasting them to existing group members, and transferring the keylist and the session key history to user B*; 
+- user A decrypting user B’s long-term public keys, broadcasting them to existing group members, and transferring the keylist and the session key history to user B†; 
 
 - user B receiving the keylist and the session key history from A;
 
 - existing group members receiving B’s long-term keypairs and updating their keyfiles.
 
 
-* In order to grant user B access to messages that were sent prior to his arrival, session keys are transferred during the third step of the keylist transfer process. User A downloads a copy of all existing session keys, decrypts and verifies them, signs them with her own private signature key, and re-encrypts them with B’s public key.
+† In order to grant user B access to messages that were sent prior to his arrival, session keys are transferred during the third step of the keylist transfer process. User A downloads a copy of all existing session keys, decrypts and verifies them, signs them with her own private signature key, and re-encrypts them with B’s public key.
 
 
 #### 4.5 – Message Exchange
@@ -110,7 +109,7 @@ _**Key encryption procedure**_
 
 _**Receive procedure**_
 
-![Send procedure](https://getsyme.com/img/paper/send.png)
+![Send procedure](https://getsyme.com/img/paper/receive.png)
 
 ### Threat Model
 
@@ -136,7 +135,7 @@ The SRP protocol is used for authentication of users. It is resistant against bo
 
 #### 5.3 – Keylist Transfer
 
-- _Man in the middle attack._ The keylist transfer process is resistant against man in the middle and masquerading attacks, which could lead to interception or substitution of long-term keys. The integrity of exchanged ECDH public keys is protected by mutual authentication through key fingerprints via an outside channel.
+- _Man in the middle attack._ The keylist transfer process is resistant against man in the middle and masquerading attacks, which could lead to interception or substitution of long-term keys. The integrity of Diffie-Hellman public keys is protected by mutual authentication through the exchange of key fingerprints via an outside channel.
 
 - _Key modification attack._ The keylist administrator may tamper with previous message keys during their transfer to a new keylist member. Since the server handles storage of encrypted messages and session keys separately, only omission of message keys is feasible. Forging messages is not possible unless the malicious user also controls the server.
 
