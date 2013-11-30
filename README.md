@@ -160,10 +160,10 @@ _______________
 (3) Dworking, M. Special Publication 800-38C : Recommendation for Block Cipher Modes 
 of Operation: the CCM Mode for Authentication and Confidentiality. May 2004. http://csrc.nist.gov/publications/nistpubs/800-38C/SP800-38C.pdf
 
-(4) ANSI  X9.62-2005. The Ellptic Curve Digital Signature Algorithm (ECDA). https://www.x9.org/home/
+(4) ANSI  X9.62-2005. The Elliptic Curve Digital Signature Algorithm (ECDA). https://www.x9.org/home/
 
 (5) Turan M., Barker E, Burr W. and Chen L. Special Publication 800-132 : Recommendation for Password-Based Key Derivation. December 2010. http://csrc.nist.gov/publications/nistpubs/800-132/nist-sp800-132.pdf
 
-(6) Talyor D., Wu T., Mavrogiannopoulos N. and Perrin L. Using the Secure Remote Password (SRP) Protocol for TLS Authentication. RFC 5054. November 2007. http://tools.ietf.org/html/rfc5054
+(6) Taylor D., Wu T., Mavrogiannopoulos N. and Perrin L. Using the Secure Remote Password (SRP) Protocol for TLS Authentication. RFC 5054. November 2007. http://tools.ietf.org/html/rfc5054
 
 (7) Cannetti R., Halevi S., Katz J. A Forward-Secure Public-Key Encryption Scheme. 2012. http://www.cs.umd.edu/~jkatz/papers/forward-enc-full.pdf
