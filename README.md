@@ -27,7 +27,7 @@ Providing anonymity or forward secrecy is not part of our security objectives. W
 
  - **Advanced Encryption Standard in Counter mode with CBC-MAC (AES-CCM)**: the AES-CCM cipher mode is used for symmetric encryption. The CCM mode provides message authentication and confidentiality [3].
  - **Elliptic Curve Cryptography (ECC)**: ECC and ECDSA with a 384-bit prime are used for encrypting and signing session keys, respectively [4].
- - **Password-Based Key Derivation Function (PBKDF2)**: PBKDF2 with 10,000 iterations of HMAC-SHA256 is used to derive keys from the user’s master password [5].
+ - **Scrypt Key Derivation Function**: the Scrypt function is used to derive keys from user passwords [5].
 
 #### Key Exchange Protocols
 
@@ -162,7 +162,7 @@ of Operation: the CCM Mode for Authentication and Confidentiality. May 2004. htt
 
 (4) ANSI  X9.62-2005. The Elliptic Curve Digital Signature Algorithm (ECDA). https://www.x9.org/home/
 
-(5) Turan M., Barker E, Burr W. and Chen L. Special Publication 800-132 : Recommendation for Password-Based Key Derivation. December 2010. http://csrc.nist.gov/publications/nistpubs/800-132/nist-sp800-132.pdf
+(5) Percival C. Stronger Key Derivation via Sequantial Memory-Hard Functions. http://www.tarsnap.com/scrypt/scrypt.pdf
 
 (6) Taylor D., Wu T., Mavrogiannopoulos N. and Perrin L. Using the Secure Remote Password (SRP) Protocol for TLS Authentication. RFC 5054. November 2007. http://tools.ietf.org/html/rfc5054
 
